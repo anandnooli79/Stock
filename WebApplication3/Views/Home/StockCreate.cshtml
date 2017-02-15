@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "File Upload";
+}
+
+<h2> Create Stock</h2>
+<div ng-controller="StockCreateController" class="container">
+    <div class="row">
+        <p class="form-group">
+            <label>Select Product Images :</label>
+            <input type="file" name="file" accept="image/*" onchange="angular.element(this).scope().StockFileforUpload(this.files)" required multiple />
+        </p>
+    </div>
+    <div ng-repeat="UploadedStock in UploadedStocks" class="row panel panel-default">
+        <div style="color: red" class="row">{{UploadedStock.Message}}</div>
+        <br />
+
+        <div class="col-md-6">
+            <img ng-src="{{UploadedStock.StockImage}}" class="img-thumbnail" style="max-height:400px; max-width:400px" />
+        </div>
+        <div class="col-md-6">
+            <p class="form-group">
+                <label>Stock SKU : </label>
+                <input type="text" class="form-control" ng-model="UploadedStock.SKUId" />
+            </p>
+            <p class="form-group">
+                <label>Stock Name : </label>
+                <input type="text" class="form-control" ng-model="UploadedStock.StockName" />
+            </p>
+            <p class="form-group">
+                <label>Description : </label>
+                <input type="text" class="form-control" ng-model="UploadedStock.StockDescription" />
+            </p>
+            <p class="form-group">
+                <label>Stock Price : </label>
+                <input type="text" class="form-control" ng-model="UploadedStock.StockPrice" />
+            </p>
+            <p class="form-group">
+                <label>Discount in % : </label>
+                <input type="text" class="form-control" ng-model="UploadedStock.DiscountPercent" />
+            </p>
+            <p class="form-group">
+                <label>In Stock: </label>
+                <input type="checkbox" class="checkbox-default" name="uFileDescription" ng-model="UploadedStock.IsInStock" />
+            </p>
+            <p class="form-group">
+                <input type="submit" ng-disabled="UploadedStock.IsUploading" class="btn btn-primary" value="Upload File" ng-click="SaveFile(UploadedStock)" />
+            </p>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/AngularController/StockCreateController.js"></script>
+}
+
